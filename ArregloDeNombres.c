@@ -10,11 +10,11 @@ void BuscarNombrePorPalabra(char *buscado, char *V[]);
 
 int main()
 {
-    printf("Hola.");
     char *lista[N];
     char buff[50];
     int cantLetrasNombre;
 
+    int seleccion;
     int numero;
 
     for (int i = 0; i < N; i++)
@@ -27,18 +27,27 @@ int main()
     }
     MostrarPersonas(lista);
 
-    printf("\nIngrese el numero de la persona a buscar: ");
-    scanf("%d", &numero);
-    BuscarNombrePorID(numero, lista);
-
-    printf("\nIngrese un nombre o parte de un nombre a buscar: ");
-    gets(buff);
-    BuscarNombrePorPalabra(buff, lista);
+    printf("\nIngrese una opcion de busqueda\n1. Buscar por numero de persona\n2. Buscar por nombre o parte de un nombre\nOpcion: ");
+    scanf("%d", &seleccion);
+    if (seleccion == 1)
+    {
+        printf("\nIngrese el numero de la persona a buscar: ");
+        scanf("%d", &numero);
+        BuscarNombrePorID(numero, lista);
+    }
+    else
+    {
+        if (seleccion == 2)
+        {
+            printf("\nIngrese un nombre o parte de un nombre a buscar: ");
+            gets(buff);
+            BuscarNombrePorPalabra(buff, lista);
+        }
+    }
     for (int i = 0; i < N; i++)
     {
         free(lista[i]);
     }
-
 
     return 0;
 }
