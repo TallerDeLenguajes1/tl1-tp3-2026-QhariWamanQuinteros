@@ -20,17 +20,32 @@ struct
 } typedef Cliente;
 
 float costoProducto(Producto producto);
+void cargarClientes(Cliente *Clientes, int cantClientes, float *costoTotalCliente);
+void mostrarClientes(Cliente *Clientes, int cantClientes, float *costoTotalCliente);
+void liberarMemoria(Cliente *Clientes, int cantClientes, float *costoTotalCliente);
 
 int main()
 {
     srand(time(NULL));
     int cantClientes;
-    float costoUnitario;
-    char nombre_cliente[30];
     printf("Ingrese la cantidad de clientes: ");
     scanf("%d", &cantClientes);
+
     float *costoTotalCliente = (float *)malloc(cantClientes * sizeof(float));
     Cliente *Clientes = (Cliente *)malloc(cantClientes * (sizeof(Cliente)));
+
+    cargarClientes(Clientes, cantClientes, costoTotalCliente);
+    mostrarClientes(Clientes, cantClientes, costoTotalCliente);
+    liberarMemoria(Clientes, cantClientes, costoTotalCliente);
+
+    return 0;
+}
+
+void cargarClientes(Cliente *Clientes, int cantClientes, float *costoTotalCliente)
+{
+    char nombre_cliente[30];
+    float costoUnitario;
+
     for (int i = 0; i < cantClientes; i++)
     {
         costoTotalCliente[i] = 0;
@@ -52,6 +67,10 @@ int main()
             costoTotalCliente[i] += costoUnitario;
         }
     }
+}
+
+void mostrarClientes(Cliente *Clientes, int cantClientes, float *costoTotalCliente)
+{
     for (int i = 0; i < cantClientes; i++)
     {
         printf("Cliente ID: %d\n", Clientes[i].ClienteID);
@@ -67,14 +86,17 @@ int main()
         }
         printf("Costo total del cliente: %.2f\n", costoTotalCliente[i]);
     }
+}
 
+void liberarMemoria(Cliente *Clientes, int cantClientes, float *costoTotalCliente)
+{
     for (int i = 0; i < cantClientes; i++)
     {
         free(Clientes[i].Productos);
         free(Clientes[i].NombreCliente);
     }
     free(Clientes);
-    return 0;
+    free(costoTotalCliente);
 }
 
 float costoProducto(Producto producto)

@@ -22,10 +22,10 @@ int main()
         printf("\nIngrese el nombre de la persona %d: ", i + 1);
         gets(buff);
         cantLetrasNombre = strlen(buff);
-        lista[i] = (char *)malloc(cantLetrasNombre * sizeof(char));
+        lista[i] = (char *)malloc(cantLetrasNombre * sizeof(char) + 1);
         strcpy(lista[i], buff);
     }
-    MostrarPersonas(lista);
+    MostrarPersonas(lista); //MostrarPersonas(&lista[0]);
 
     printf("\nIngrese una opcion de busqueda\n1. Buscar por numero de persona\n2. Buscar por nombre o parte de un nombre\nOpcion: ");
     scanf("%d", &seleccion);
@@ -83,7 +83,7 @@ void BuscarNombrePorPalabra(char *buscado, char *V[])
             bandera = 1;
         }
     }
-    if (resultado == NULL && bandera == 0)
+    if (bandera == 0)
     {
         printf("\nNo se encontro el valor buscado");
     }
