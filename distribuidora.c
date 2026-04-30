@@ -30,7 +30,6 @@ int main()
     int cantClientes;
     printf("Ingrese la cantidad de clientes: ");
     scanf("%d", &cantClientes);
-
     float *costoTotalCliente = (float *)malloc(cantClientes * sizeof(float));
     Cliente *Clientes = (Cliente *)malloc(cantClientes * (sizeof(Cliente)));
 
